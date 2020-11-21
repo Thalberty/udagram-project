@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { ApiService } from 'src/app/api/api.service';
+import { ApiFeedService } from 'src/app/api/api.feed.service';
 import { catchError, tap } from 'rxjs/operators';
 
 const JWT_LOCALSTORE_KEY = 'jwt';
@@ -12,7 +13,7 @@ const USER_LOCALSTORE_KEY = 'user';
 })
 export class AuthService {
   currentUser$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-  constructor( private api: ApiService ) {
+  constructor( private api: ApiService, private apiFeed: ApiFeedService  ) {
     this.initToken();
   }
 
@@ -28,6 +29,7 @@ export class AuthService {
     localStorage.setItem(JWT_LOCALSTORE_KEY, token);
     localStorage.setItem(USER_LOCALSTORE_KEY, JSON.stringify(user));
     this.api.setAuthToken(token);
+    this.apiFeed.setAuthToken(token);
     this.currentUser$.next(user);
   }
 
