@@ -7,6 +7,6 @@ data:
   JWT_SECRET: aaaa
   POSTGRES_DB: aaaa
   POSTGRES_HOST: aaaa
-  URL: http://ad07067ff85cc4ffe93a3dc4f58edadc-108940045.eu-west-2.elb.amazonaws.com:8100
+  URL: url:8100
 metadata:
   name: env-config
